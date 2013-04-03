@@ -29,6 +29,7 @@ describe User do
 
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remeber_token) }
 
   describe "when name is too long" do
     before { @user.name = "a" * 51 }
@@ -84,4 +85,12 @@ describe User do
       before { @user.password_confirmation = nil }
         it { should_not be_valid }
   end
+
+  describe "remeber token" do
+    before {@user.save}
+    its(:remeber_token) { should_not be_blank }
+  end
+
+
 end
+

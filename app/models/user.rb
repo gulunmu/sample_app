@@ -21,4 +21,11 @@ class User < ActiveRecord::Base
             uniqueness: { case_sensitive: false }
 
   before_save { |user| user.email = email.downcase }
+  before_save :create_remeber_token
+
+
+  private 
+    def create_remeber_token
+      self.remeber_token = SecureRandom.urlsafe_base64
+    end
 end
